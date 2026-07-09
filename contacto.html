@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contacto - Blackjack</title>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <header>
+        <h1>Contacto</h1>
+        <div class="header-enlaces">
+            <a href="index.html">Volver al Juego</a>
+            <a href="https://github.com/brunopignani/blackjack" target="_blank">Ver en GitHub</a>
+        </div>
+    </header>
+    <main class="mesa-casino">
+        <section class="area-jugador">
+            <h2>Envíanos un mensaje</h2>
+            <form id="formulario-contacto" class="panel-control">
+                <input type="text" id="nombre-contacto" placeholder="Nombre">
+                <input type="email" id="email-contacto" placeholder="Correo Electrónico">
+                <textarea id="mensaje-contacto" class="input-contacto" placeholder="Mensaje" rows="4"></textarea>
+                <p id="error-formulario" class="texto-error"></p>
+                <button type="button" id="btn-enviar">Enviar Correo</button>
+            </form>
+        </section>
+    </main>
+    <script src="js/contacto.js"></script>
+</body>
+</html>
