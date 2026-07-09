@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blackjack</title>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+    <header>
+        <h1>Mesa de Blackjack</h1>
+        <div class="header-enlaces">
+            <a href="contacto.html">Ir a Contacto</a>
+            <a href="https://github.com/brunopignani/blackjack" target="_blank">Ver en GitHub</a>
+        </div>
+    </header>
+
+    <main id="pantalla-inicio" class="caja-inicio">
+        <h2>Bienvenido al Casino</h2>
+        <p>Por favor, ingresá tu nombre para jugar:</p>
+        <input type="text" id="input-nombre" placeholder="Tu nombre...">
+        <p id="error-nombre" class="texto-error"></p>
+        <button id="btn-comenzar">Entrar a la Mesa</button>
+        <button id="btn-reglas" class="btn-secundario">Cómo Jugar</button>
+    </main>
+
+    <main id="pantalla-reglas" class="caja-inicio oculto">
+        <h2>Reglas y Controles</h2>
+        <div class="caja-reglas">
+            <p><strong>Objetivo:</strong> Sumar 21 puntos o estar más cerca que el casino sin pasarte.</p>
+            <p><strong>Valores:</strong> Las figuras valen 10. El As vale 11 (o 1 si te pasás de 21).</p>
+            <hr>
+            <p><strong>Teclado:</strong></p>
+            <ul>
+                <li>Presioná <strong>[Enter]</strong> para Apostar.</li>
+                <li>Presioná <strong>[→] (Flecha Derecha)</strong> para Pedir Carta.</li>
+                <li>Presioná <strong>[←] (Flecha Izquierda)</strong> para Mantenerse.</li>
+            </ul>
+        </div>
+        <button id="btn-volver-reglas">Volver al Menú</button>
+    </main>
+
+    <main id="pantalla-juego" class="mesa-casino oculto">
+
+        <section class="area-crupier">
+            <h2>Crupier</h2>
+            <p>Puntaje: <span id="puntaje-crupier">?</span></p>
+            <div id="cartas-crupier" class="contenedor-cartas"></div>
+        </section>
+
+        <section class="area-mensajes">
+            <h3 id="mensaje-juez">Esperando apuesta para comenzar...</h3>
+        </section>
+
+        <section class="area-jugador">
+            <h2 id="titulo-jugador">Tu Mano</h2>
+            <p>Puntaje: <span id="puntaje-jugador">0</span></p>
+            <div id="cartas-jugador" class="contenedor-cartas"></div>
+
+            <div class="panel-control">
+                <p>Saldo en cuenta: $<span id="saldo-jugador">500</span></p>
+
+                <div id="zona-apuesta">
+                    <input type="number" id="input-apuesta" placeholder="Monto a apostar (Ej: 50)" min="1">
+                    <button id="btn-apostar">Apostar y Repartir</button>
+                </div>
+
+                <div id="zona-acciones">
+                    <button id="btn-pedir" disabled>Pedir Carta</button>
+                    <button id="btn-plantarse" disabled>Plantarse</button>
+                </div>
+
+                <div class="caja-historial">
+                    <h3>Historial de Partidas</h3>
+                    <ul id="lista-historial"></ul>
+                </div>
+            </div>
+        </section>
+
+    </main>
+    <script src="js/motor.js"></script>
+    <script src="js/juego.js"></script>
+</body>
+</html>
