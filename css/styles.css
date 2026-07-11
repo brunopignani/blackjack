@@ -84,7 +84,7 @@ button:disabled {
     min-height: 20px; 
 }
 .oculto {
-    display: none !important;
+    display: none;
 }
 .header-enlaces {
     margin-bottom: 20px; 
@@ -148,6 +148,35 @@ button:disabled {
     width: 220px; 
     font-family: Arial, sans-serif;
 }
+
+.item-historial {
+    padding: 5px 0;
+    border-bottom: 1px solid #333;
+}
+.historial-ganado {
+    color: #4ade80;
+}
+.historial-perdido {
+    color: #ef4444;
+}
+.historial-empate {
+    color: #9ca3af;
+}
+
+
+.carta-roja {
+    color: red;
+}
+.mensaje-ganador {
+    background-color: darkgreen;
+}
+.mensaje-perdedor {
+    background-color: darkred;
+}
+.mensaje-empate {
+    background-color: dimgray;
+}
+
 @media screen and (max-width: 480px) {
     .mesa-casino {
         width: 100%;

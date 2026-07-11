@@ -3,7 +3,7 @@
 Proyecto final para la materia **Desarrollo y Arquitecturas Web** de la Universidad Abierta Interamericana (UAI).
 
 ## Descripción
-Este proyecto es una aplicación web interactiva del clásico juego de casino Blackjack..
+Este proyecto es una aplicación web interactiva del clásico juego de casino Blackjack.
 
 ## Tecnologías Utilizadas
 * **HTML5:** Estructura semántica, sin uso de estilos ni scripts en línea.

@@ -68,7 +68,11 @@ btnApostar.addEventListener("click", function() {
     var cantidadIngresada = parseInt(inputApuesta.value);
     
     mensajeJuez.textContent = "";
-    cajaMensajes.style.backgroundColor = ""; 
+    
+    // Limpiamos los colores de la mano anterior
+    cajaMensajes.classList.remove("mensaje-ganador");
+    cajaMensajes.classList.remove("mensaje-perdedor");
+    cajaMensajes.classList.remove("mensaje-empate");
     
     if (isNaN(cantidadIngresada) || cantidadIngresada <= 0) {
         mensajeJuez.textContent = "Error: Ingresá un monto válido mayor a $0.";
@@ -109,16 +113,16 @@ btnVolverReglas.addEventListener("click", function() {
 document.addEventListener("keydown", function(evento) {
     var tecla = evento.key; 
 
-    if (document.activeElement === inputNombre && tecla === "Enter") {
+    if (evento.target === inputNombre && tecla === "Enter") {
         btnComenzar.click();
         return;
     }
-    if (document.activeElement === inputApuesta && tecla === "Enter") {
+    if (evento.target === inputApuesta && tecla === "Enter") {
         evento.preventDefault(); 
         btnApostar.click();
         return;
     }
-    if (document.activeElement.tagName === "INPUT") {
+    if (evento.target.tagName === "INPUT") {
         return; 
     }
     if (tecla === "Enter" && btnApostar.disabled === false && pantallaJuego.classList.contains("oculto") === false) {
@@ -136,9 +140,12 @@ function dibujarCartaEnMesa(carta, contenedorDestino) {
     var nuevaCartaVisual = document.createElement("div"); 
     nuevaCartaVisual.classList.add("carta-fisica"); 
     nuevaCartaVisual.textContent = carta.valor + carta.palo; 
+    
+    // Inyectamos la clase de CSS en lugar del estilo en línea
     if (carta.palo === "♥" || carta.palo === "♦") {
-        nuevaCartaVisual.style.color = "red";
+        nuevaCartaVisual.classList.add("carta-roja");
     }
+    
     contenedorDestino.appendChild(nuevaCartaVisual);
 }
 
@@ -225,26 +232,26 @@ function determinarGanador() {
 
     if (puntosJugador > 21) {
         mensajeJuez.textContent = "Te pasaste de 21. El casino gana.";
-        cajaMensajes.style.backgroundColor = "darkred";
-        registrarEnHistorial("Perdiste $" + apuestaActual + " (Te pasaste)", "#ef4444");
+        cajaMensajes.classList.add("mensaje-perdedor");
+        registrarEnHistorial("Perdiste $" + apuestaActual + " (Te pasaste)", "historial-perdido");
     } else if (puntosCrupier > 21) {
         mensajeJuez.textContent = "¡El crupier se pasó de 21! ¡GANASTE!";
-        cajaMensajes.style.backgroundColor = "darkgreen";
-        registrarEnHistorial("Ganaste $" + (apuestaActual * 2) + " (Crupier se pasó)", "#4ade80");
+        cajaMensajes.classList.add("mensaje-ganador");
+        registrarEnHistorial("Ganaste $" + (apuestaActual * 2) + " (Crupier se pasó)", "historial-ganado");
         pagarVictoria();
     } else if (puntosJugador > puntosCrupier) {
         mensajeJuez.textContent = "¡Tenés mejor mano! ¡GANASTE!";
-        cajaMensajes.style.backgroundColor = "darkgreen";
-        registrarEnHistorial("Ganaste $" + (apuestaActual * 2) + " (Mejor mano)", "#4ade80");
+        cajaMensajes.classList.add("mensaje-ganador");
+        registrarEnHistorial("Ganaste $" + (apuestaActual * 2) + " (Mejor mano)", "historial-ganado");
         pagarVictoria();
     } else if (puntosJugador < puntosCrupier) {
         mensajeJuez.textContent = "El casino tiene mejor mano. Perdiste.";
-        cajaMensajes.style.backgroundColor = "darkred";
-        registrarEnHistorial("Perdiste $" + apuestaActual + " (Mano menor)", "#ef4444");
+        cajaMensajes.classList.add("mensaje-perdedor");
+        registrarEnHistorial("Perdiste $" + apuestaActual + " (Mano menor)", "historial-perdido");
     } else {
         mensajeJuez.textContent = "¡Es un empate! Recuperás tu dinero.";
-        cajaMensajes.style.backgroundColor = "dimgray";
-        registrarEnHistorial("Empate (Recuperás $" + apuestaActual + ")", "#9ca3af");
+        cajaMensajes.classList.add("mensaje-empate");
+        registrarEnHistorial("Empate (Recuperás $" + apuestaActual + ")", "historial-empate");
         devolverApuesta();
     }
 
@@ -270,14 +277,15 @@ function actualizarYGuardarSaldo() {
     localStorage.setItem("Blackjack_Saldo_" + nombreJugador, saldoJugador);
 }
 
-function registrarEnHistorial(resultado, colorTexto) {
+function registrarEnHistorial(resultado, claseColor) {
     var nuevoItem = document.createElement("li");
     numeroMano = numeroMano + 1;
     nuevoItem.textContent = "Mano #" + numeroMano + " - " + resultado;
-    nuevoItem.style.color = colorTexto;
-    nuevoItem.style.padding = "5px 0";
-    nuevoItem.style.borderBottom = "1px solid #333";
-    listaHistorial.insertBefore(nuevoItem, listaHistorial.firstChild);
+    
+    nuevoItem.classList.add("item-historial");
+    nuevoItem.classList.add(claseColor);
+    
+    listaHistorial.appendChild(nuevoItem);
     localStorage.setItem("Blackjack_Historial_" + nombreJugador, listaHistorial.innerHTML);
 }
 

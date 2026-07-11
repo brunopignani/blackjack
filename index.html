@@ -17,16 +17,18 @@
         </div>
     </header>
 
-    <main id="pantalla-inicio" class="caja-inicio">
+    <!-- Se cambia <main> por <section> para las pantallas secundarias -->
+    <section id="pantalla-inicio" class="caja-inicio">
         <h2>Bienvenido al Casino</h2>
         <p>Por favor, ingresá tu nombre para jugar:</p>
         <input type="text" id="input-nombre" placeholder="Tu nombre...">
         <p id="error-nombre" class="texto-error"></p>
         <button id="btn-comenzar">Entrar a la Mesa</button>
         <button id="btn-reglas" class="btn-secundario">Cómo Jugar</button>
-    </main>
+    </section>
 
-    <main id="pantalla-reglas" class="caja-inicio oculto">
+    <!-- Se cambia <main> por <section> -->
+    <section id="pantalla-reglas" class="caja-inicio oculto">
         <h2>Reglas y Controles</h2>
         <div class="caja-reglas">
             <p><strong>Objetivo:</strong> Sumar 21 puntos o estar más cerca que el casino sin pasarte.</p>
@@ -40,8 +42,9 @@
             </ul>
         </div>
         <button id="btn-volver-reglas">Volver al Menú</button>
-    </main>
+    </section>
 
+    <!-- La mesa de juego conserva la etiqueta <main> por ser el núcleo de la aplicación -->
     <main id="pantalla-juego" class="mesa-casino oculto">
 
         <section class="area-crupier">
