@@ -1,6 +1,5 @@
 "use strict";
 
-var nombreJugador = "";
 var pantallaInicio = document.getElementById("pantalla-inicio");
 var pantallaJuego = document.getElementById("pantalla-juego");
 var inputNombre = document.getElementById("input-nombre");
@@ -11,7 +10,6 @@ var inputApuesta = document.getElementById("input-apuesta");
 var btnApostar = document.getElementById("btn-apostar");
 var spanSaldo = document.getElementById("saldo-jugador");
 var mensajeJuez = document.getElementById("mensaje-juez");
-var cajaMensajes = document.querySelector(".area-mensajes"); 
 var spanPuntajeJugador = document.getElementById("puntaje-jugador");
 var spanPuntajeCrupier = document.getElementById("puntaje-crupier");
 var divCartasJugador = document.getElementById("cartas-jugador");
@@ -22,7 +20,9 @@ var btnReglas = document.getElementById("btn-reglas");
 var btnVolverReglas = document.getElementById("btn-volver-reglas");
 var pantallaReglas = document.getElementById("pantalla-reglas");
 var listaHistorial = document.getElementById("lista-historial");
+var cajaMensajes = document.querySelector(".area-mensajes"); 
 var numeroMano = 0;
+var nombreJugador = "";
 
 btnComenzar.addEventListener("click", function() {
     var nombreIngresado = inputNombre.value.trim(); 
@@ -69,17 +69,19 @@ btnApostar.addEventListener("click", function() {
     
     mensajeJuez.textContent = "";
     
-    // Limpiamos los colores de la mano anterior
     cajaMensajes.classList.remove("mensaje-ganador");
     cajaMensajes.classList.remove("mensaje-perdedor");
     cajaMensajes.classList.remove("mensaje-empate");
+    mensajeJuez.classList.remove("texto-error");
     
-    if (isNaN(cantidadIngresada) || cantidadIngresada <= 0) {
+    if (!cantidadIngresada || cantidadIngresada <= 0) {
         mensajeJuez.textContent = "Error: Ingresá un monto válido mayor a $0.";
+        mensajeJuez.classList.add("texto-error");
         return;
     }
     if (cantidadIngresada > saldoJugador) {
         mensajeJuez.textContent = "Error: Fondos insuficientes. Tu saldo es de $" + saldoJugador;
+        mensajeJuez.classList.add("texto-error");
         return;
     }
     
@@ -141,7 +143,6 @@ function dibujarCartaEnMesa(carta, contenedorDestino) {
     nuevaCartaVisual.classList.add("carta-fisica"); 
     nuevaCartaVisual.textContent = carta.valor + carta.palo; 
     
-    // Inyectamos la clase de CSS en lugar del estilo en línea
     if (carta.palo === "♥" || carta.palo === "♦") {
         nuevaCartaVisual.classList.add("carta-roja");
     }
@@ -190,12 +191,10 @@ function jugadorPideCarta() {
     spanPuntajeJugador.textContent = puntosJugador;
 
     if (puntosJugador > 21) {
-        mensajeJuez.textContent = "¡Te pasaste de 21! Has perdido la apuesta.";
         btnPedir.disabled = true;
         btnPlantarse.disabled = true;
         determinarGanador();
     } else if (puntosJugador === 21) {
-        mensajeJuez.textContent = "¡Llegaste a 21 clavados! Turno del crupier.";
         jugarTurnoCrupier();
     } else {
         mensajeJuez.textContent = "Tu puntaje es " + puntosJugador + ". ¿Pedís carta o te plantás?";

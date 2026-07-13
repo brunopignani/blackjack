@@ -17,17 +17,15 @@
         </div>
     </header>
 
-    <!-- Se cambia <main> por <section> para las pantallas secundarias -->
     <section id="pantalla-inicio" class="caja-inicio">
         <h2>Bienvenido al Casino</h2>
         <p>Por favor, ingresá tu nombre para jugar:</p>
         <input type="text" id="input-nombre" placeholder="Tu nombre...">
         <p id="error-nombre" class="texto-error"></p>
-        <button id="btn-comenzar">Entrar a la Mesa</button>
-        <button id="btn-reglas" class="btn-secundario">Cómo Jugar</button>
+        <button id="btn-comenzar">Comenzar</button>
+        <button id="btn-reglas" class="btn-secundario">Reglas</button>
     </section>
 
-    <!-- Se cambia <main> por <section> -->
     <section id="pantalla-reglas" class="caja-inicio oculto">
         <h2>Reglas y Controles</h2>
         <div class="caja-reglas">
@@ -41,15 +39,14 @@
                 <li>Presioná <strong>[←] (Flecha Izquierda)</strong> para Mantenerse.</li>
             </ul>
         </div>
-        <button id="btn-volver-reglas">Volver al Menú</button>
+        <button id="btn-volver-reglas">Volver</button>
     </section>
 
-    <!-- La mesa de juego conserva la etiqueta <main> por ser el núcleo de la aplicación -->
     <main id="pantalla-juego" class="mesa-casino oculto">
 
         <section class="area-crupier">
             <h2>Crupier</h2>
-            <p>Puntaje: <span id="puntaje-crupier">?</span></p>
+            <p>Puntaje: <span id="puntaje-crupier">0</span></p>
             <div id="cartas-crupier" class="contenedor-cartas"></div>
         </section>
 
@@ -71,8 +68,8 @@
                 </div>
 
                 <div id="zona-acciones">
-                    <button id="btn-pedir" disabled>Pedir Carta</button>
                     <button id="btn-plantarse" disabled>Plantarse</button>
+                    <button id="btn-pedir" disabled>Pedir Carta</button>
                 </div>
 
                 <div class="caja-historial">

@@ -6,7 +6,8 @@ var inputEmail = document.getElementById("email-contacto");
 var inputMensaje = document.getElementById("mensaje-contacto");
 var errorFormulario = document.getElementById("error-formulario");
 
-btnEnviar.addEventListener("click", function() {
+btnEnviar.addEventListener("click", function(evento) {
+    evento.preventDefault();
     var nombre = inputNombre.value.trim();
     var email = inputEmail.value.trim();
     var mensaje = inputMensaje.value.trim();
